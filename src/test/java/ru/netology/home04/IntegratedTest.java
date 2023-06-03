@@ -42,16 +42,16 @@ class IntegratedTest {
     @Test
     @Order(1)
     void addData() {
-        repo.add(person1);
-        repo.add(person2);
-        repo.add(person3);
-        var list = repo.getAll();
-        assertThat(list).hasSize(3);
+        repo.save(person1);
+        repo.save(person2);
+        repo.save(person3);
+
+        assertThat(repo.count()).isEqualTo(3L);
     }
 
     @Test
     void test_moscow() {
-        var response = template.getForEntity("/api/persons/by-city?city=Moscow", List.class);
+        var response = template.getForEntity("/api/persons/by-city?city=moscow", List.class);
         var list = response.getBody();
         assert list != null;
         assertThat(list)
@@ -65,6 +65,21 @@ class IntegratedTest {
         assert list != null;
         assertThat(list)
                 .isEmpty();
+    }
+
+    @Test
+    void byAgeLess() {
+        var response = template.getForEntity("/api/persons/age-less?age=23", List.class);
+        var list = response.getBody();
+        assert list != null;
+        assertThat(list)
+                .hasSize(2);
+    }
+    @Test
+    void byFullName() {
+        var response = template.getForEntity("/api/persons/by-fullname?name=Vasya&surname=Pupkin", Person.class);
+        var person = response.getBody();
+        assertThat(person).isEqualTo(person1);
     }
 
 }
