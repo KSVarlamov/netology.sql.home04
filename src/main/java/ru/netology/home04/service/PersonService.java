@@ -18,15 +18,15 @@ public class PersonService {
 
 
     public List<Person> getByCity(String city) {
-        return repo.getAllByCityEqualsIgnoreCase(city);
+        return repo.getAllByCity(city);
     }
 
     public List<Person> getByAgeLess(int age) {
-        return repo.getAllByPk_AgeLessThan(age);
+        return repo.getAllAgeLessThan(age);
     }
 
     public Optional<Person> getByNameAndSurname(String name, String surname) {
-        return repo.getPersonByPk_NameAndPk_Surname(name, surname);
+        return repo.getPersonByFullName(name, surname);
     }
 
 }
