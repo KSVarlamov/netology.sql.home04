@@ -14,4 +14,4 @@
 
 * ``/api/persons/by-city`` - Должно пускать без авторизации
 * ``/api/persons/age-less`` - c пользователем `admin@123`
-* ``/api/persons/by-fullname`` - c пользователем `admin@123 и test@test`
+* ``/api/persons/by-fullname`` - c пользователем `admin@123` и `test@test`
